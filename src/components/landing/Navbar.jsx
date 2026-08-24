@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { label: "Enterprise", hasDropdown: false },
 ];
 
-export default function Navbar() {
+export default function Navbar({ onNavigateOnboard }) {
   const [scrolled, setScrolled] = useState(false);
   const reduce = useReducedMotion();
 
@@ -27,13 +27,13 @@ export default function Navbar() {
       <div className="w-full bg-[#09090B] text-zinc-300 text-xs font-medium text-center py-2 px-4 flex items-center justify-center gap-2 flex-wrap">
         <span className="text-zinc-500">New</span>
         <span className="text-zinc-400">HQ AI Workspace is now live in beta.</span>
-        <a
-          href="#"
-          className="inline-flex items-center gap-1 text-white font-semibold hover:text-zinc-300 transition-colors underline-offset-2 hover:underline"
+        <button
+          onClick={onNavigateOnboard}
+          className="inline-flex items-center gap-1 text-white font-semibold hover:text-zinc-300 transition-colors underline-offset-2 hover:underline cursor-pointer"
         >
           Read announcement
           <ArrowRight size={10} strokeWidth={2.5} />
-        </a>
+        </button>
       </div>
 
       {/* ── Main navbar ─────────────────────────── */}
@@ -72,25 +72,13 @@ export default function Navbar() {
 
           {/* Actions */}
           <div className="flex items-center gap-1.5">
-            <a
-              href="#"
-              className="hidden sm:inline-flex h-9 px-3.5 items-center text-[13.5px] font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-all duration-150"
-            >
-              Sign in
-            </a>
-            <a
-              href="#"
-              className="hidden md:inline-flex h-9 px-3.5 items-center text-[13.5px] font-medium text-zinc-700 border border-zinc-300 rounded-lg hover:border-zinc-400 hover:bg-zinc-50 transition-all duration-150"
-            >
-              Book a demo
-            </a>
-            <a
-              href="#"
-              className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg bg-[#09090B] text-white text-[13.5px] font-semibold hover:bg-[#18181B] active:scale-[0.98] transition-all duration-150"
+            <button
+              onClick={onNavigateOnboard}
+              className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg bg-[#09090B] text-white text-[13.5px] font-semibold hover:bg-[#18181B] active:scale-[0.98] transition-all duration-150 cursor-pointer"
             >
               Get started
               <ArrowRight size={12} strokeWidth={2.5} />
-            </a>
+            </button>
           </div>
         </div>
       </motion.header>

@@ -23,7 +23,7 @@ const wordVariant = {
   }),
 };
 
-export default function HeroSection() {
+export default function HeroSection({ onNavigateOnboard }) {
   const reduce = useReducedMotion();
   const sectionRef = useRef(null);
 
@@ -90,22 +90,22 @@ export default function HeroSection() {
 
         {/* CTAs */}
         <motion.div {...fadeUp(0.56)} className="flex flex-wrap items-center justify-center gap-3">
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 h-11 px-6 rounded-xl bg-[#09090B] text-white text-sm font-semibold hover:bg-[#18181B] active:scale-[0.98] transition-all duration-150 shadow-md shadow-zinc-900/20"
+          <button
+            onClick={onNavigateOnboard}
+            className="inline-flex items-center gap-2 h-11 px-6 rounded-xl bg-[#09090B] text-white text-sm font-semibold hover:bg-[#18181B] active:scale-[0.98] transition-all duration-150 shadow-md shadow-zinc-900/20 cursor-pointer"
           >
             Start for free
             <ArrowRight size={14} strokeWidth={2.5} />
-          </a>
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 h-11 px-5 rounded-xl border border-zinc-200 bg-white text-zinc-700 text-sm font-medium hover:border-zinc-300 hover:bg-zinc-50 active:scale-[0.98] transition-all duration-150"
+          </button>
+          <button
+            onClick={onNavigateOnboard}
+            className="inline-flex items-center gap-2 h-11 px-5 rounded-xl border border-zinc-200 bg-white text-zinc-700 text-sm font-medium hover:border-zinc-300 hover:bg-zinc-50 active:scale-[0.98] transition-all duration-150 cursor-pointer"
           >
             <span className="w-6 h-6 rounded-full bg-zinc-100 flex items-center justify-center">
               <Play size={10} strokeWidth={3} className="text-zinc-700 ml-0.5" />
             </span>
             Watch 2-min demo
-          </a>
+          </button>
         </motion.div>
 
         {/* Trust line — edworking-style */}

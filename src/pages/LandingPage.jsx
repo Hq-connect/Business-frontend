@@ -157,11 +157,11 @@ const SERVICES = [
   },
 ];
 
-export default function LandingPage() {
+export default function LandingPage({ onNavigateOnboard }) {
   return (
     <div className="min-h-screen bg-white dark:bg-[#0B1120]">
-      <Navbar />
-      <HeroSection />
+      <Navbar onNavigateOnboard={onNavigateOnboard} />
+      <HeroSection onNavigateOnboard={onNavigateOnboard} />
       <IntegrationStrip />
 
       {SERVICES.map((service, i) => (
@@ -173,7 +173,7 @@ export default function LandingPage() {
         />
       ))}
 
-      <CTASection />
+      <CTASection onNavigateOnboard={onNavigateOnboard} />
       <Footer />
     </div>
   );

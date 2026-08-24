@@ -7,7 +7,7 @@ const STATS = [
   { value: "0", label: "per-seat charges" },
 ];
 
-export default function CTASection() {
+export default function CTASection({ onNavigateOnboard }) {
   const reduce = useReducedMotion();
 
   return (
@@ -56,19 +56,19 @@ export default function CTASection() {
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <a
-                href="#"
-                className="inline-flex items-center gap-2 h-11 px-7 rounded-xl bg-white text-zinc-900 text-sm font-bold hover:bg-zinc-100 active:scale-[0.98] transition-all duration-150 shadow-lg shadow-black/30"
+              <button
+                onClick={onNavigateOnboard}
+                className="inline-flex items-center gap-2 h-11 px-7 rounded-xl bg-white text-zinc-900 text-sm font-bold hover:bg-zinc-100 active:scale-[0.98] transition-all duration-150 shadow-lg shadow-black/30 cursor-pointer"
               >
                 Get Started Free
                 <ArrowRight size={14} strokeWidth={2.5} />
-              </a>
-              <a
-                href="#"
-                className="inline-flex items-center h-11 px-6 rounded-xl border border-zinc-700 text-zinc-300 text-sm font-medium hover:bg-zinc-800 hover:text-white active:scale-[0.98] transition-all duration-150"
+              </button>
+              <button
+                onClick={onNavigateOnboard}
+                className="inline-flex items-center h-11 px-6 rounded-xl border border-zinc-700 text-zinc-300 text-sm font-medium hover:bg-zinc-800 hover:text-white active:scale-[0.98] transition-all duration-150 cursor-pointer"
               >
                 Talk to sales
-              </a>
+              </button>
             </div>
 
             <p className="mt-8 text-zinc-600 text-xs">
