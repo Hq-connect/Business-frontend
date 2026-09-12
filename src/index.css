@@ -1,29 +1,30 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
+@import "@fontsource-variable/plus-jakarta-sans";
 
 @custom-variant dark (&:is(.dark *));
 
 /* ─────────────────────────────────────────
-   HQ CONNECT — DESIGN SYSTEM v2
-   Accent:   Zinc-950  #09090B (near black)
-   Surface:  Warm off-white #FAF9F7
-   Border:   #E4E4E7
-   Text:     #09090B headlines / #71717A body
-   Font:     Geist Variable
+   HQ CONNECT — DESIGN SYSTEM v3
+   Inspired by Vitraga.com
+   Font:     Plus Jakarta Sans Variable
+   Background: Pure white
+   Accent:   #09090B (near black)
+   Style:    Minimal, spacious, editorial
 ───────────────────────────────────────── */
 
 @theme inline {
-  --font-sans: 'Geist Variable', system-ui, sans-serif;
-  --font-heading: 'Geist Variable', system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-heading: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, sans-serif;
 
-  /* Radius scale */
-  --radius-sm:  0.375rem;
-  --radius-md:  0.5rem;
-  --radius-lg:  0.75rem;
-  --radius-xl:  1rem;
-  --radius-2xl: 1.5rem;
+  /* Radius scale - sharp edges */
+  --radius-sm:  0px;
+  --radius-md:  0px;
+  --radius-lg:  0px;
+  --radius-xl:  0px;
+  --radius-2xl: 0px;
+  --radius:     0px;
 
   /* Token aliases */
   --color-background:           var(--background);
@@ -52,57 +53,54 @@
   --color-sidebar-foreground:         var(--sidebar-foreground);
   --color-sidebar:                    var(--sidebar);
 
-  /* HQ brand tokens — v2 (zinc-black accent) */
+  /* HQ brand tokens — v3 (minimal) */
   --color-hq-black:       #09090B;
   --color-hq-black-soft:  #18181B;
   --color-hq-zinc:        #3F3F46;
   --color-hq-muted:       #71717A;
-  --color-hq-border:      #E4E4E7;
-  --color-hq-surface:     #FAF9F7;
+  --color-hq-border:      #E5E7EB;
+  --color-hq-surface:     #FFFFFF;
   --color-hq-white:       #FFFFFF;
-
-  /* Sky blue kept ONLY for logo identity, used sparingly */
-  --color-sky-logo:       #38BDF8;
 }
 
 /* ── Light mode ───────────────────────── */
 :root {
-  --background:            #FAF9F7;
-  --foreground:            #09090B;
+  --background:            #FFFFFF;
+  --foreground:            #111827;
   --card:                  #FFFFFF;
-  --card-foreground:       #09090B;
+  --card-foreground:       #111827;
   --popover:               #FFFFFF;
-  --popover-foreground:    #09090B;
+  --popover-foreground:    #111827;
 
   /* Primary = near black */
-  --primary:               #09090B;
-  --primary-foreground:    #FAFAFA;
+  --primary:               #111827;
+  --primary-foreground:    #FFFFFF;
 
-  --secondary:             #F4F4F5;
-  --secondary-foreground:  #09090B;
+  --secondary:             #F3F4F6;
+  --secondary-foreground:  #111827;
 
-  --muted:                 #F4F4F5;
-  --muted-foreground:      #71717A;
+  --muted:                 #F3F4F6;
+  --muted-foreground:      #6B7280;
 
-  --accent:                #F4F4F5;
-  --accent-foreground:     #09090B;
+  --accent:                #F3F4F6;
+  --accent-foreground:     #111827;
 
   --destructive:           oklch(0.577 0.245 27.325);
 
-  --border:                #E4E4E7;
-  --input:                 #E4E4E7;
-  --ring:                  #09090B;
+  --border:                #E5E7EB;
+  --input:                 #E5E7EB;
+  --ring:                  #111827;
 
-  --radius: 0.75rem;
+  --radius: 0px;
 
-  --sidebar:                      #F4F4F5;
-  --sidebar-foreground:           #09090B;
-  --sidebar-primary:              #09090B;
-  --sidebar-primary-foreground:   #FAFAFA;
-  --sidebar-accent:               #E4E4E7;
-  --sidebar-accent-foreground:    #09090B;
-  --sidebar-border:               #E4E4E7;
-  --sidebar-ring:                 #09090B;
+  --sidebar:                      #F3F4F6;
+  --sidebar-foreground:           #111827;
+  --sidebar-primary:              #111827;
+  --sidebar-primary-foreground:   #FFFFFF;
+  --sidebar-accent:               #E5E7EB;
+  --sidebar-accent-foreground:    #111827;
+  --sidebar-border:               #E5E7EB;
+  --sidebar-ring:                 #111827;
 }
 
 /* ── Dark mode ────────────────────────── */
@@ -153,59 +151,43 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: auto; /* Lenis handles smooth scroll */
+  }
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
 }
 
 /* ── Utilities ────────────────────────── */
 @layer utilities {
-  /* Subtle dot grid texture */
-  .bg-dot-grid {
-    background-image: radial-gradient(#D4D4D8 1px, transparent 1px);
-    background-size: 24px 24px;
-  }
-
-  /* Line grid (for hero) */
-  .bg-line-grid {
-    background-image:
-      linear-gradient(rgba(9,9,11,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(9,9,11,0.04) 1px, transparent 1px);
-    background-size: 56px 56px;
-  }
-
-  /* Card shadows */
+  /* Card shadows — subtle, Vitraga-style */
   .shadow-card {
     box-shadow:
-      0 1px 3px rgba(0,0,0,0.05),
-      0 4px 12px rgba(0,0,0,0.05),
-      0 0 0 1px rgba(0,0,0,0.04);
+      0 1px 2px rgba(0,0,0,0.04),
+      0 1px 3px rgba(0,0,0,0.03);
   }
   .shadow-card-lg {
     box-shadow:
-      0 4px 6px -1px rgba(0,0,0,0.06),
-      0 16px 48px -12px rgba(0,0,0,0.12),
-      0 0 0 1px rgba(0,0,0,0.04);
-  }
-  /* Premium diagram drop shadow */
-  .shadow-diagram {
-    box-shadow:
-      0 0 0 1px rgba(0,0,0,0.06),
-      0 8px 24px -4px rgba(0,0,0,0.08),
-      0 48px 80px -24px rgba(0,0,0,0.12);
-  }
-
-  /* Noise texture overlay for premium feel */
-  .bg-noise::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
+      0 4px 6px -1px rgba(0,0,0,0.04),
+      0 10px 20px -5px rgba(0,0,0,0.06);
   }
 
   /* Strikethrough badge */
   .badge-strikethrough {
-    @apply px-2 py-0.5 rounded bg-zinc-100 text-zinc-400 text-[11px] font-medium line-through decoration-zinc-400;
+    @apply px-2 py-0.5 bg-gray-100 text-gray-400 text-[11px] font-medium line-through decoration-gray-400;
   }
 }
 
@@ -216,17 +198,6 @@
 }
 .animate-marquee { animation: marquee 32s linear infinite; }
 
-/* ── Subtle float for diagram ─────────── */
-@keyframes diagram-float {
-  0%, 100% { transform: translateY(0) rotateX(6deg); }
-  50%       { transform: translateY(-6px) rotateX(5deg); }
-}
-.animate-diagram-float {
-  animation: diagram-float 8s ease-in-out infinite;
-  transform-style: preserve-3d;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
-  .animate-diagram-float { animation: none; }
+  .animate-marquee { animation: none; }
 }

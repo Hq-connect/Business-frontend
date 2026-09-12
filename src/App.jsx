@@ -1,27 +1,19 @@
-import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import OnboardingPage from "./pages/OnboardingPage";
+import ServiceDetailPage from "./pages/ServiceDetailPage";
+import Layout from "./components/landing/Layout";
 
 function App() {
-  const [currentRoute, setCurrentRoute] = useState(() => {
-    return window.location.pathname === "/onboard" ? "onboard" : "landing";
-  });
-
-  const navigateToOnboard = () => {
-    setCurrentRoute("onboard");
-    window.history.pushState({}, "", "/onboard");
-  };
-
-  const navigateToLanding = () => {
-    setCurrentRoute("landing");
-    window.history.pushState({}, "", "/");
-  };
-
-  if (currentRoute === "onboard") {
-    return <OnboardingPage onBackToHome={navigateToLanding} />;
-  }
-
-  return <LandingPage onNavigateOnboard={navigateToOnboard} />;
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/onboard" element={<OnboardingPage />} />
+        <Route path="/services/:serviceId" element={<ServiceDetailPage />} />
+      </Route>
+    </Routes>
+  );
 }
 
 export default App;

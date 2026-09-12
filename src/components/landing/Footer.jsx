@@ -1,55 +1,95 @@
+import { Link } from "react-router-dom";
 import Logo from "../mockup/Logo";
-
-const NAV = {
-  Product:  ["Communication", "Meetings", "File Sharing", "Docs", "Calendar", "Tasks", "Search", "AI Workspace", "Analytics", "Org Management"],
-  Solutions:["Startups", "SMEs", "Remote Teams", "Enterprise", "Agencies"],
-  Company:  ["About", "Blog", "Careers", "Press", "Contact"],
-  Legal:    ["Privacy", "Terms", "Security"],
-};
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-zinc-200 pt-16 pb-10">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 pb-12">
-          {/* Brand */}
-          <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
-            <div className="h-8 w-auto flex items-center">
+    <footer className="relative bg-white border-t border-neutral-200 pt-20 pb-0 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        {/* Top Section: Brand Info + Minimal Columns (Matches user screenshot) */}
+        <div className="flex flex-col md:flex-row justify-between items-start gap-12 pb-20 sm:pb-28">
+          {/* Left: Brand Identity */}
+          <div className="flex flex-col gap-5">
+            <Link to="/" className="h-8 w-auto flex items-center" aria-label="HQ Connect home">
               <Logo />
-            </div>
-            <p className="text-sm text-zinc-400 leading-relaxed max-w-[22ch]">
-              One workspace for every tool your team needs.
-            </p>
-            <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span className="text-xs text-zinc-400">All systems operational</span>
+            </Link>
+            <div className="text-sm text-neutral-500 font-normal leading-relaxed space-y-1">
+              <p>Copyright © {new Date().getFullYear()} HQ Connect Labs</p>
+              <p>All rights reserved</p>
             </div>
           </div>
 
-          {Object.entries(NAV).map(([group, links]) => (
-            <div key={group} className="flex flex-col gap-4">
-              <p className="text-[11px] font-semibold text-zinc-900 tracking-widest uppercase">{group}</p>
-              <ul className="flex flex-col gap-2">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-[13px] text-zinc-400 hover:text-zinc-900 transition-colors duration-150">
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+          {/* Right: Navigation Link Columns */}
+          <div className="grid grid-cols-2 gap-16 sm:gap-24 text-sm">
+            {/* Column 1: Main Links */}
+            <div className="flex flex-col gap-3.5">
+              <Link
+                to="/#features"
+                className="text-neutral-600 hover:text-black transition-colors duration-150"
+              >
+                About
+              </Link>
+              <Link
+                to="/#features"
+                className="text-neutral-600 hover:text-black transition-colors duration-150"
+              >
+                Services
+              </Link>
+              <Link
+                to="/#features"
+                className="text-neutral-600 hover:text-black transition-colors duration-150"
+              >
+                Work
+              </Link>
+              <Link
+                to="/#features"
+                className="text-neutral-600 hover:text-black transition-colors duration-150"
+              >
+                Careers
+              </Link>
+              <Link
+                to="/onboard"
+                className="text-neutral-600 hover:text-black transition-colors duration-150"
+              >
+                Contact
+              </Link>
             </div>
-          ))}
-        </div>
 
-        <div className="pt-8 border-t border-zinc-100 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-zinc-400">
-            &copy; {new Date().getFullYear()} HQ Connect. All rights reserved.
-          </p>
-          <p className="text-xs text-zinc-400">
-            Made for teams that actually want to get work done.
-          </p>
+            {/* Column 2: Social / Community */}
+            <div className="flex flex-col gap-3.5">
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-neutral-600 hover:text-black transition-colors duration-150"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-neutral-600 hover:text-black transition-colors duration-150"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-neutral-600 hover:text-black transition-colors duration-150"
+              >
+                Twitter / X
+              </a>
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* ── Bottom Section: Monumental Brand Watermark ── */}
+      <div className="w-full select-none pointer-events-none overflow-hidden flex justify-center items-end leading-none pb-4 sm:pb-8 pt-4">
+        <h2 className="font-extrabold uppercase tracking-tighter text-[14vw] sm:text-[15vw] xl:text-[16vw] leading-[0.8] whitespace-nowrap bg-gradient-to-b from-neutral-300 via-neutral-200/70 to-neutral-100/20 bg-clip-text text-transparent translate-y-0">
+          HQ CONNECT
+        </h2>
       </div>
     </footer>
   );

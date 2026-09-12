@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { useNavigate, Link } from "react-router-dom";
 import Logo from "../components/mockup/Logo";
 import Step1OrgDetails from "../components/onboarding/Step1OrgDetails";
 import Step2OwnerCredentials from "../components/onboarding/Step2OwnerCredentials";
@@ -10,7 +11,9 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, ArrowLeft, CheckCircle2, Globe, Sparkles, ShieldCheck } from "lucide-react";
 import { onboardTenant } from "@/service/service";
 
-export default function OnboardingPage({ onBackToHome }) {
+export default function OnboardingPage() {
+  const navigate = useNavigate();
+  const onBackToHome = () => navigate("/");
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
@@ -170,33 +173,10 @@ export default function OnboardingPage({ onBackToHome }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F7] text-zinc-900 flex flex-col justify-between relative overflow-hidden">
-      {/* Background Subtle Line Grid */}
-      <div className="absolute inset-0 bg-line-grid pointer-events-none opacity-80" />
-
-      {/* Header Bar */}
-      <header className="relative z-10 w-full max-w-7xl mx-auto px-6 h-16 flex items-center justify-between border-b border-zinc-200/60 bg-[#FAF9F7]/80 backdrop-blur-md">
-        <button
-          onClick={onBackToHome}
-          className="h-8 w-auto flex items-center focus:outline-none cursor-pointer"
-          aria-label="HQ Connect home"
-        >
-          <Logo />
-        </button>
-
-        <div className="flex items-center gap-3">
-          <span className="text-xs text-zinc-500 hidden sm:inline-block">Already registered?</span>
-          <button
-            onClick={onBackToHome}
-            className="text-xs font-semibold text-zinc-900 hover:underline cursor-pointer"
-          >
-            Back to Home
-          </button>
-        </div>
-      </header>
+    <div className="min-h-screen bg-white text-gray-900 flex flex-col justify-between relative overflow-hidden">
 
       {/* Main Content Area */}
-      <main className="relative z-10 flex-1 flex items-center justify-center py-12 px-4 sm:px-6">
+      <main className="relative z-10 flex-1 flex items-center justify-center pt-28 pb-16 px-4 sm:px-6">
         <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
           {/* Left Column — Value proposition panel */}
@@ -222,7 +202,7 @@ export default function OnboardingPage({ onBackToHome }) {
             {/* Feature Checklist */}
             <div className="space-y-3.5 pt-2">
               <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-zinc-900 text-white flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-5 h-5 rounded-none bg-zinc-900 text-white flex items-center justify-center flex-shrink-0 mt-0.5">
                   <CheckCircle2 size={12} strokeWidth={2.5} />
                 </div>
                 <div>
@@ -232,7 +212,7 @@ export default function OnboardingPage({ onBackToHome }) {
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-zinc-900 text-white flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-5 h-5 rounded-none bg-zinc-900 text-white flex items-center justify-center flex-shrink-0 mt-0.5">
                   <CheckCircle2 size={12} strokeWidth={2.5} />
                 </div>
                 <div>
@@ -242,7 +222,7 @@ export default function OnboardingPage({ onBackToHome }) {
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-zinc-900 text-white flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-5 h-5 rounded-none bg-zinc-900 text-white flex items-center justify-center flex-shrink-0 mt-0.5">
                   <ShieldCheck size={12} strokeWidth={2.5} />
                 </div>
                 <div>
@@ -253,9 +233,9 @@ export default function OnboardingPage({ onBackToHome }) {
             </div>
 
             {/* Live Subdomain Preview Card */}
-            <div className="p-4 rounded-xl border border-zinc-200 bg-white/90 shadow-sm space-y-1.5 mt-2">
+            <div className="p-4 rounded-none border border-zinc-200 bg-white/90 shadow-sm space-y-1.5 mt-2">
               <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">Live URL Preview</span>
-              <div className="flex items-center gap-2 font-mono text-xs text-zinc-800 bg-zinc-50 p-2.5 rounded-lg border border-zinc-200 truncate">
+              <div className="flex items-center gap-2 font-mono text-xs text-zinc-800 bg-zinc-50 p-2.5 rounded-none border border-zinc-200 truncate">
                 <Globe size={14} className="text-zinc-500 flex-shrink-0" />
                 <span className="truncate">
                   https://<strong className="text-zinc-900 font-bold">{formData.slug || "your-slug"}</strong>.hq.com
@@ -271,7 +251,7 @@ export default function OnboardingPage({ onBackToHome }) {
             transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7"
           >
-            <Card className="border-zinc-200 shadow-xl bg-white rounded-2xl overflow-hidden">
+            <Card className="border-zinc-200 shadow-xl bg-white rounded-none overflow-hidden">
               <CardHeader className="border-b border-zinc-100 bg-zinc-50/50 pb-4">
                 <CardTitle className="text-xl font-bold text-zinc-900">Create Tenant Workspace</CardTitle>
                 <CardDescription className="text-xs text-zinc-500">
@@ -348,7 +328,7 @@ export default function OnboardingPage({ onBackToHome }) {
                     <Button
                       type="button"
                       onClick={handleNext}
-                      className="w-full sm:w-auto h-11 px-7 bg-[#09090B] text-white hover:bg-[#18181B] font-semibold text-sm rounded-xl transition-all cursor-pointer"
+                      className="w-full sm:w-auto h-11 px-7 bg-black text-white hover:bg-neutral-800 font-semibold text-sm rounded-none transition-all cursor-pointer"
                     >
                       Next Step
                       <ArrowRight size={14} className="ml-1.5" strokeWidth={2.5} />
@@ -357,7 +337,7 @@ export default function OnboardingPage({ onBackToHome }) {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full sm:w-auto h-11 px-7 bg-[#09090B] text-white hover:bg-[#18181B] font-semibold text-sm rounded-xl transition-all shadow-md cursor-pointer"
+                      className="w-full sm:w-auto h-11 px-7 bg-black text-white hover:bg-neutral-800 font-semibold text-sm rounded-none transition-all shadow-md cursor-pointer"
                     >
                       {isSubmitting ? (
                         <span className="flex items-center gap-2">

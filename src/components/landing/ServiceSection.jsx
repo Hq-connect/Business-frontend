@@ -1,102 +1,107 @@
 import { motion, useReducedMotion } from "motion/react";
-import { Badge } from "@/components/ui/badge";
-import { CheckCircle2 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
-export default function ServiceSection({ service, imageLeft = true, index = 0 }) {
+export default function ServiceSection({ service, index = 0 }) {
   const reduce = useReducedMotion();
-  const { Icon, title, headline, body, bullets, image, replaces } = service;
-  const isEven = index % 2 === 0;
-
-  const slide = (fromLeft) =>
-    reduce ? {} : {
-      initial: { opacity: 0, x: fromLeft ? -40 : 40 },
-      whileInView: { opacity: 1, x: 0 },
-      viewport: { once: true, amount: 0.22 },
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-    };
+  const { Icon, title, headline, body, bullets, image, id } = service;
+  const imageLeft = index % 2 === 0;
 
   const fadeUp = (delay = 0) =>
-    reduce ? {} : {
-      initial: { opacity: 0, y: 18 },
-      whileInView: { opacity: 1, y: 0 },
-      viewport: { once: true, amount: 0.22 },
-      transition: { duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] },
-    };
+    reduce
+      ? {}
+      : {
+          initial: { opacity: 0, y: 24 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, amount: 0.2 },
+          transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] },
+        };
 
   const ImagePane = () => (
-    <motion.div {...slide(imageLeft)} className="relative group">
-      <div className="relative rounded-2xl overflow-hidden border border-zinc-200 bg-white shadow-card-lg">
-        <div className="flex items-center gap-1.5 px-4 h-9 border-b border-zinc-100 bg-zinc-50">
-          <span className="w-2 h-2 rounded-full bg-[#FF5F57]" />
-          <span className="w-2 h-2 rounded-full bg-[#FDBC2C]" />
-          <span className="w-2 h-2 rounded-full bg-[#28C840]" />
-          <div className="ml-2.5 flex-1 h-4 max-w-[160px] rounded bg-zinc-200/60 flex items-center px-2">
-            <span className="text-[9px] font-mono text-zinc-400 truncate">
-              hq.io/{title.toLowerCase().replace(/\s/g, "-")}
-            </span>
+    <motion.div {...fadeUp(0.1)} className="relative group">
+      <Link to={`/services/${id}`} className="block">
+        <div className="relative overflow-hidden rounded-none border border-neutral-200 bg-neutral-100 aspect-[16/10]">
+          <img
+            src={image}
+            alt={`HQ ${title}`}
+            className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
+          {/* Hover arrow indicator — Sharp architectural badge */}
+          <div className="absolute top-4 right-4 w-9 h-9 rounded-none bg-white/95 border border-neutral-200 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-200 shadow-sm">
+            <ArrowRight size={15} strokeWidth={2} className="text-black -rotate-45" />
           </div>
         </div>
-        <img
-          src={image}
-          alt={`HQ ${title} feature`}
-          className="w-full aspect-[16/10] object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
-          loading="lazy"
-        />
-      </div>
+      </Link>
     </motion.div>
   );
 
   const TextPane = () => (
-    <div className="flex flex-col gap-5 max-w-[480px]">
-      <motion.div {...fadeUp(0.04)} className="flex items-center gap-2.5 flex-wrap">
-        <div className="w-9 h-9 rounded-lg border border-zinc-200 bg-white shadow-sm flex items-center justify-center flex-shrink-0">
-          <Icon size={18} strokeWidth={1.75} className="text-zinc-600" />
+    <div className="flex flex-col gap-5 max-w-lg">
+      <motion.div {...fadeUp(0)} className="flex items-center gap-3">
+        <div className="w-8 h-8 rounded-none border border-neutral-200 bg-neutral-100 flex items-center justify-center flex-shrink-0">
+          <Icon size={16} strokeWidth={1.75} className="text-neutral-700" />
         </div>
-        <span className="text-[12px] font-semibold text-zinc-500 uppercase tracking-widest">{title}</span>
-        {replaces && (
-          <span className="px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-400 text-[10px] font-medium border border-zinc-200">
-            replaces {replaces}
-          </span>
-        )}
+        <span className="text-xs font-medium text-neutral-400 uppercase tracking-wider">
+          {title}
+        </span>
       </motion.div>
 
       <motion.h2
-        {...fadeUp(0.1)}
-        className="text-[2rem] md:text-[2.4rem] font-bold leading-[1.1] tracking-[-0.03em] text-zinc-900"
+        {...fadeUp(0.06)}
+        className="text-2xl md:text-4xl font-normal tracking-tight text-neutral-900 leading-[1.12]"
       >
         {headline}
       </motion.h2>
 
-      <motion.p {...fadeUp(0.16)} className="text-[15px] text-zinc-500 leading-relaxed">
+      <motion.p
+        {...fadeUp(0.12)}
+        className="text-sm sm:text-base text-neutral-500 leading-relaxed"
+      >
         {body}
       </motion.p>
 
-      <motion.div {...fadeUp(0.22)} className="flex flex-col gap-2.5 pt-1">
+      <motion.ul {...fadeUp(0.18)} className="flex flex-col gap-2 pt-1">
         {bullets.map((b, i) => (
-          <motion.div
-            key={i}
-            initial={reduce ? false : { opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.4, delay: 0.28 + i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-start gap-2.5"
-          >
-            <CheckCircle2 size={15} strokeWidth={2} className="text-zinc-700 mt-0.5 flex-shrink-0" />
-            <span className="text-[13.5px] text-zinc-600">{b}</span>
-          </motion.div>
+          <li key={i} className="flex items-start gap-2.5">
+            <span className="w-1.5 h-1.5 bg-neutral-800 mt-2 flex-shrink-0" />
+            <span className="text-sm text-neutral-600">{b}</span>
+          </li>
         ))}
+      </motion.ul>
+
+      <motion.div {...fadeUp(0.24)}>
+        <Link
+          to={`/services/${id}`}
+          className="group inline-flex items-center gap-2 text-sm font-medium text-neutral-800 hover:text-black transition-colors duration-150 pt-2"
+        >
+          Learn more
+          <ArrowRight
+            size={14}
+            strokeWidth={2}
+            className="group-hover:translate-x-1 transition-transform duration-150 text-black"
+          />
+        </Link>
       </motion.div>
     </div>
   );
 
   return (
-    <section className={`py-20 md:py-28 ${isEven ? "bg-[#FAF9F7]" : "bg-white"}`}>
-      <div className="max-w-7xl mx-auto px-6 mb-16">
-        <div className="h-px bg-zinc-200" />
-      </div>
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-          {imageLeft ? <><ImagePane /><TextPane /></> : <><TextPane /><ImagePane /></>}
+    <section className="py-20 md:py-32 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {imageLeft ? (
+            <>
+              <ImagePane />
+              <TextPane />
+            </>
+          ) : (
+            <>
+              <TextPane />
+              <ImagePane />
+            </>
+          )}
         </div>
       </div>
     </section>

@@ -17,11 +17,11 @@ export default function OnboardingProgress({ currentStep, onStepClick }) {
             <button
               type="button"
               onClick={() => onStepClick(step.number)}
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all focus:outline-none cursor-pointer ${
+              className={`w-8 h-8 rounded-none flex items-center justify-center text-xs font-bold transition-all focus:outline-none cursor-pointer ${
                 isCompleted
                   ? "bg-zinc-900 text-white"
                   : isActive
-                  ? "bg-zinc-900 text-white ring-4 ring-zinc-100"
+                  ? "bg-zinc-900 text-white ring-2 ring-zinc-300"
                   : "bg-zinc-100 text-zinc-400 border border-zinc-200"
               }`}
             >
