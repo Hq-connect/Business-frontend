@@ -154,8 +154,14 @@ export default function OnboardingPage() {
 
     await onboardTenant(formData);
     const finalSlug = formData.slug;
-      // Redirect to slug.hq.com as required by API contract
-    window.location.href = `https://${finalSlug}.hq.com`;
+
+    // Redirect to the newly created tenant workspace
+    const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    if (isLocal) {
+      window.location.href = `http://localhost:5174/?slug=${finalSlug}`;
+    } else {
+      window.location.href = `https://${finalSlug}.hqconnect.xyz`;
+    }
 
     setFormData({
       name: "",
@@ -207,7 +213,7 @@ export default function OnboardingPage() {
                 </div>
                 <div>
                   <p className="text-xs font-semibold text-zinc-900">Custom Subdomain</p>
-                  <p className="text-[11px] text-zinc-500">Dedicated workspace at your-slug.hq.com</p>
+                  <p className="text-[11px] text-zinc-500">Dedicated workspace at your-slug.hqconnect.xyz</p>
                 </div>
               </div>
 
@@ -238,7 +244,7 @@ export default function OnboardingPage() {
               <div className="flex items-center gap-2 font-mono text-xs text-zinc-800 bg-zinc-50 p-2.5 rounded-none border border-zinc-200 truncate">
                 <Globe size={14} className="text-zinc-500 flex-shrink-0" />
                 <span className="truncate">
-                  https://<strong className="text-zinc-900 font-bold">{formData.slug || "your-slug"}</strong>.hq.com
+                  https://<strong className="text-zinc-900 font-bold">{formData.slug || "your-slug"}</strong>.hqconnect.xyz
                 </span>
               </div>
             </div>
@@ -319,7 +325,7 @@ export default function OnboardingPage() {
                       </Button>
                     ) : (
                       <span className="text-[11px] text-zinc-400">
-                        Target URL: <strong className="text-zinc-700 font-mono">{formData.slug || "slug"}.hq.com</strong>
+                        Target URL: <strong className="text-zinc-700 font-mono">{formData.slug || "slug"}.hqconnect.xyz</strong>
                       </span>
                     )}
                   </div>

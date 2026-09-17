@@ -56,10 +56,10 @@ export default function Step1OrgDetails({
                 placeholder="acme-corp"
                 value={formData.slug}
                 onChange={onSlugChange}
-                className={`pr-16 ${errors.slug ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+                className={`pr-28 ${errors.slug ? "border-red-500 focus-visible:ring-red-500" : ""}`}
               />
               <span className="absolute right-3 top-2.5 text-xs font-mono text-zinc-400 pointer-events-none">
-                .hq.com
+                .hqconnect.xyz
               </span>
             </div>
             {errors.slug && <p className="text-[11px] font-medium text-red-500">{errors.slug}</p>}
